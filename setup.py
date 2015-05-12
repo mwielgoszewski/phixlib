@@ -22,7 +22,7 @@ if USE_CYTHON:
 
 setup(
     name='phixlib',
-    version='1.0',
+    version='1.0.1',
     author='Marcin Wielgoszewski',
     packages=['phixlib'],
     package_data={
