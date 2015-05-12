@@ -838,8 +838,8 @@ class Group(object):
             else:
                 needs_normalizing = False
 
+            keys = [k for k in set(self._all) if k in kwargs]
             if needs_normalizing:
-                keys = [k for k in set(self._all) if k in kwargs]
                 args = [dict(zip(keys, v)) for v in izip_longest(*(kwargs[k] for k in keys))]
             else:
                 args = [{key: kwargs[key] for key in set(keys) & set(kwargs)}]
