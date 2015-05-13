@@ -586,7 +586,7 @@ class FIXTrailer(FIXMixIn):
             if name in self._initialized:
                 continue
 
-            if name in ('CheckSum'):
+            if name in ('CheckSum', ):
                 continue
 
             if field.required or optional or name in kwargs:
