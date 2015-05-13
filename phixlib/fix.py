@@ -830,19 +830,19 @@ class Group(object):
         # the following code will normalize keyword arguments
         # passed from a web query (args will be empty)...
 
-        if not args and set(self._all) & set(kwargs):
-            for key in set(self._all) & set(kwargs):
-                if isinstance(kwargs[key], (list, tuple)):
-                    needs_normalizing = True
-                    break
-            else:
-                needs_normalizing = False
+        keys = set(self._all) & set(kwargs)
 
-            keys = [k for k in set(self._all) if k in kwargs]
-            if needs_normalizing:
-                args = [dict(zip(keys, v)) for v in izip_longest(*(kwargs[k] for k in keys))]
+        if not args and keys:
+            for key in keys:
+                if not isinstance(kwargs[key], (list, tuple)):
+                    continue
+
+                args = [dict(zip(keys, v)) for v in
+                        izip_longest(*(kwargs[k] for k in keys))]
+                break
+
             else:
-                args = [{key: kwargs[key] for key in set(keys) & set(kwargs)}]
+                args = [{key: kwargs[key] for key in keys}]
 
         for kw in args:
             group = []
