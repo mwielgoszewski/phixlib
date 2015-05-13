@@ -530,7 +530,6 @@ class FIXHeader(FIXMixIn):
             if field.required or optional or name in kwargs:
                 if name in kwargs:
                     self._initialized[name] = field(kwargs[name], **kwargs)
-
                 else:
                     self._initialized[name] = field(**kwargs)
 
@@ -592,7 +591,6 @@ class FIXTrailer(FIXMixIn):
             if field.required or optional or name in kwargs:
                 if name in kwargs:
                     self._initialized[name] = field(kwargs[name], **kwargs)
-
                 else:
                     self._initialized[name] = field(**kwargs)
 
