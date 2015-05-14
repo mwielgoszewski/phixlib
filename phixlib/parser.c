@@ -668,6 +668,7 @@ static PyObject *__pyx_builtin_KeyError;
 static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_message, PyObject *__pyx_v_cls, PyObject *__pyx_v_version); /* proto */
 static PyObject *__pyx_pf_7phixlib_6parser_2make_field(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_number); /* proto */
 static char __pyx_k_8[] = "8=";
+static char __pyx_k_9[] = "9";
 static char __pyx_k_35[] = "35";
 static char __pyx_k__2[] = "=";
 static char __pyx_k__3[] = "";
@@ -724,9 +725,10 @@ static char __pyx_k_field_length[] = "field_length";
 static char __pyx_k_parse_message[] = "parse_message";
 static char __pyx_k_phixlib_parser[] = "phixlib.parser";
 static char __pyx_k_Users_marcin_src_phixlib_phixli[] = "/Users/marcin/src/phixlib/phixlib/parser.pyx";
-static char __pyx_k_phixlib_parser_This_module_cont[] = "\nphixlib.parser\n~~~~~~~~~~~~~\n\nThis module contains a `parse_message` function for parsing a FIX\nmessage into a dict of keys and values. The parser is intelligent\nenough to determine the SOH byte (last byte of the message). The\nparser attempts to determine the FIX version it is working with based\non the BeginString, falling back to the FIX version supplied in\n*version* (default is FIX.4.2).\n\nIf you know the message type before hand, you can specify a *cls*\nparameter to `parse_message` to force parsing as that message.\n\n";
+static char __pyx_k_phixlib_parser_This_module_cont[] = "\nphixlib.parser\n~~~~~~~~~~~~~~\n\nThis module contains a `parse_message` function for parsing a FIX\nmessage into a dict of keys and values. The parser is intelligent\nenough to determine the SOH byte (last byte of the message). The\nparser attempts to determine the FIX version it is working with based\non the BeginString, falling back to the FIX version supplied in\n*version* (default is FIX.4.2).\n\nIf you know the message type before hand, you can specify a *cls*\nparameter to `parse_message` to force parsing as that message.\n\n";
 static PyObject *__pyx_kp_s_35;
 static PyObject *__pyx_kp_s_8;
+static PyObject *__pyx_kp_s_9;
 static PyObject *__pyx_n_s_BeginString;
 static PyObject *__pyx_n_s_FIX;
 static PyObject *__pyx_n_s_FIXMessage;
@@ -960,7 +962,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
  *     soh = message[-1]   # could be \001, |, ^...
  * 
  *     mlen = len(message)             # <<<<<<<<<<<<<<
- *     find = message.find   # optimize-out attribute lookup
+ *     find = message.find   # optimize attribute lookup
  * 
  */
   __pyx_t_2 = PyObject_Length(__pyx_v_message); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -969,7 +971,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
   /* "phixlib/parser.pyx":56
  * 
  *     mlen = len(message)
- *     find = message.find   # optimize-out attribute lookup             # <<<<<<<<<<<<<<
+ *     find = message.find   # optimize attribute lookup             # <<<<<<<<<<<<<<
  * 
  *     # parse out BeginString so we know what we're working with
  */
@@ -1478,7 +1480,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
  * 
  *         try:             # <<<<<<<<<<<<<<
  *             field = fix.Fields[number]
- *             field_length = int(value) if field.type == 'LENGTH' and value.isdigit() else 0
+ *             field_length = int(value) if number != '9' and field.type == 'LENGTH' and value.isdigit() else 0
  */
     {
       __Pyx_ExceptionSave(&__pyx_t_10, &__pyx_t_11, &__pyx_t_12);
@@ -1491,7 +1493,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
  * 
  *         try:
  *             field = fix.Fields[number]             # <<<<<<<<<<<<<<
- *             field_length = int(value) if field.type == 'LENGTH' and value.isdigit() else 0
+ *             field_length = int(value) if number != '9' and field.type == 'LENGTH' and value.isdigit() else 0
  *         except KeyError:
  */
         __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_fix, __pyx_n_s_Fields); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
@@ -1505,10 +1507,16 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
         /* "phixlib/parser.pyx":110
  *         try:
  *             field = fix.Fields[number]
- *             field_length = int(value) if field.type == 'LENGTH' and value.isdigit() else 0             # <<<<<<<<<<<<<<
+ *             field_length = int(value) if number != '9' and field.type == 'LENGTH' and value.isdigit() else 0             # <<<<<<<<<<<<<<
  *         except KeyError:
  *             # needs testing
  */
+        __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_number, __pyx_kp_s_9, Py_NE)); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+        if (__pyx_t_4) {
+        } else {
+          __pyx_t_7 = __pyx_t_4;
+          goto __pyx_L21_bool_binop_done;
+        }
         __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_field, __pyx_n_s_type); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_t_3, __pyx_n_s_LENGTH, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
@@ -1567,7 +1575,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
 
       /* "phixlib/parser.pyx":111
  *             field = fix.Fields[number]
- *             field_length = int(value) if field.type == 'LENGTH' and value.isdigit() else 0
+ *             field_length = int(value) if number != '9' and field.type == 'LENGTH' and value.isdigit() else 0
  *         except KeyError:             # <<<<<<<<<<<<<<
  *             # needs testing
  *             field = make_field(number)
@@ -1648,11 +1656,11 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     if (__pyx_t_9) {
     } else {
       __pyx_t_7 = __pyx_t_9;
-      goto __pyx_L26_bool_binop_done;
+      goto __pyx_L27_bool_binop_done;
     }
     __pyx_t_9 = (__Pyx_PyString_Equals(__pyx_v_number, __pyx_kp_s_35, Py_EQ)); if (unlikely(__pyx_t_9 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_7 = __pyx_t_9;
-    __pyx_L26_bool_binop_done:;
+    __pyx_L27_bool_binop_done:;
     if (__pyx_t_7) {
 
       /* "phixlib/parser.pyx":118
@@ -1718,16 +1726,16 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
         __Pyx_INCREF(__pyx_t_6);
         __pyx_t_8 = __pyx_t_6;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        goto __pyx_L28_bool_binop_done;
+        goto __pyx_L29_bool_binop_done;
       }
       __Pyx_INCREF(__pyx_v_fix);
       __pyx_t_8 = __pyx_v_fix;
-      __pyx_L28_bool_binop_done:;
+      __pyx_L29_bool_binop_done:;
       __Pyx_XDECREF_SET(__pyx_v__all, __pyx_t_8);
       __pyx_t_8 = 0;
-      goto __pyx_L25;
+      goto __pyx_L26;
     }
-    __pyx_L25:;
+    __pyx_L26:;
 
     /* "phixlib/parser.pyx":121
  *             _all = cls._all or fix
@@ -1740,7 +1748,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     if (__pyx_t_9) {
     } else {
       __pyx_t_7 = __pyx_t_9;
-      goto __pyx_L31_bool_binop_done;
+      goto __pyx_L32_bool_binop_done;
     }
     __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_field, __pyx_n_s_name); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
@@ -1749,7 +1757,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_4 = (__pyx_t_9 != 0);
     __pyx_t_7 = __pyx_t_4;
-    __pyx_L31_bool_binop_done:;
+    __pyx_L32_bool_binop_done:;
     if (__pyx_t_7) {
 
       /* "phixlib/parser.pyx":122
@@ -1767,9 +1775,9 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF_SET(__pyx_v_field, __pyx_t_6);
       __pyx_t_6 = 0;
-      goto __pyx_L30;
+      goto __pyx_L31;
     }
-    __pyx_L30:;
+    __pyx_L31:;
 
     /* "phixlib/parser.pyx":133
  *         #   5. field in nested repeating group
@@ -1782,7 +1790,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     if (__pyx_t_4) {
     } else {
       __pyx_t_7 = __pyx_t_4;
-      goto __pyx_L34_bool_binop_done;
+      goto __pyx_L35_bool_binop_done;
     }
     __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_field, __pyx_n_s_name); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
@@ -1796,7 +1804,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_9 = (__pyx_t_4 != 0);
     __pyx_t_7 = __pyx_t_9;
-    __pyx_L34_bool_binop_done:;
+    __pyx_L35_bool_binop_done:;
     if (__pyx_t_7) {
 
       /* "phixlib/parser.pyx":134
@@ -1819,9 +1827,9 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF_SET(__pyx_v_field, __pyx_t_8);
       __pyx_t_8 = 0;
-      goto __pyx_L33;
+      goto __pyx_L34;
     }
-    __pyx_L33:;
+    __pyx_L34:;
 
     /* "phixlib/parser.pyx":138
  *         #print 'parsed', field.name, repr(value), issubclass(field, Group)
@@ -1835,7 +1843,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     if (__pyx_t_4) {
     } else {
       __pyx_t_7 = __pyx_t_4;
-      goto __pyx_L37_bool_binop_done;
+      goto __pyx_L38_bool_binop_done;
     }
     __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_Group); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
@@ -1843,7 +1851,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_9 = (__pyx_t_4 != 0);
     __pyx_t_7 = __pyx_t_9;
-    __pyx_L37_bool_binop_done:;
+    __pyx_L38_bool_binop_done:;
     if (__pyx_t_7) {
 
       /* "phixlib/parser.pyx":140
@@ -1939,7 +1947,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     if (__pyx_t_9) {
     } else {
       __pyx_t_7 = __pyx_t_9;
-      goto __pyx_L39_bool_binop_done;
+      goto __pyx_L40_bool_binop_done;
     }
     __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_Group); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
@@ -1947,7 +1955,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_4 = (__pyx_t_9 != 0);
     __pyx_t_7 = __pyx_t_4;
-    __pyx_L39_bool_binop_done:;
+    __pyx_L40_bool_binop_done:;
     if (__pyx_t_7) {
 
       /* "phixlib/parser.pyx":150
@@ -2018,7 +2026,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
         __pyx_t_16 = __Pyx_PyObject_Append(__pyx_t_1, __pyx_t_8); if (unlikely(__pyx_t_16 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        goto __pyx_L41;
+        goto __pyx_L42;
       }
       /*else*/ {
 
@@ -2064,7 +2072,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
         __pyx_t_16 = __Pyx_PyObject_Append(__pyx_v_group, __pyx_t_15); if (unlikely(__pyx_t_16 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
       }
-      __pyx_L41:;
+      __pyx_L42:;
 
       /* "phixlib/parser.pyx":158
  *                 group.append({})
@@ -2139,12 +2147,12 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     if (__pyx_t_7) {
     } else {
       __pyx_t_4 = __pyx_t_7;
-      goto __pyx_L42_bool_binop_done;
+      goto __pyx_L43_bool_binop_done;
     }
     __pyx_t_2 = PyList_GET_SIZE(__pyx_v_stack); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_7 = ((__pyx_t_2 == 1) != 0);
     __pyx_t_4 = __pyx_t_7;
-    __pyx_L42_bool_binop_done:;
+    __pyx_L43_bool_binop_done:;
     if (__pyx_t_4) {
 
       /* "phixlib/parser.pyx":165
@@ -2222,9 +2230,9 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
           __Pyx_GOTREF(__pyx_t_15);
           __pyx_t_16 = __Pyx_PyObject_Append(__pyx_v_group, __pyx_t_15); if (unlikely(__pyx_t_16 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-          goto __pyx_L45;
+          goto __pyx_L46;
         }
-        __pyx_L45:;
+        __pyx_L46:;
 
         /* "phixlib/parser.pyx":174
  *                     group.append({})
@@ -2335,11 +2343,11 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
  */
           __Pyx_INCREF(Py_None);
           __Pyx_DECREF_SET(__pyx_v_group, Py_None);
-          goto __pyx_L46;
+          goto __pyx_L47;
         }
-        __pyx_L46:;
+        __pyx_L47:;
       }
-      goto __pyx_L36;
+      goto __pyx_L37;
     }
 
     /* "phixlib/parser.pyx":186
@@ -2353,12 +2361,12 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
     if (__pyx_t_7) {
     } else {
       __pyx_t_4 = __pyx_t_7;
-      goto __pyx_L47_bool_binop_done;
+      goto __pyx_L48_bool_binop_done;
     }
     __pyx_t_2 = PyList_GET_SIZE(__pyx_v_stack); if (unlikely(__pyx_t_2 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 186; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_7 = ((__pyx_t_2 > 1) != 0);
     __pyx_t_4 = __pyx_t_7;
-    __pyx_L47_bool_binop_done:;
+    __pyx_L48_bool_binop_done:;
     if (__pyx_t_4) {
 
       /* "phixlib/parser.pyx":187
@@ -2448,9 +2456,9 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
           __pyx_t_16 = __Pyx_PyObject_Append(__pyx_t_5, __pyx_t_8); if (unlikely(__pyx_t_16 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-          goto __pyx_L50;
+          goto __pyx_L51;
         }
-        __pyx_L50:;
+        __pyx_L51:;
 
         /* "phixlib/parser.pyx":193
  *                     group[-1][stack[-1].name].append({})
@@ -2609,7 +2617,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
         if (__pyx_t_4) {
         } else {
           __pyx_t_7 = __pyx_t_4;
-          goto __pyx_L54_bool_binop_done;
+          goto __pyx_L55_bool_binop_done;
         }
         __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_field, __pyx_n_s_name); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
@@ -2617,7 +2625,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_9 = (__pyx_t_4 != 0);
         __pyx_t_7 = __pyx_t_9;
-        __pyx_L54_bool_binop_done:;
+        __pyx_L55_bool_binop_done:;
         if (__pyx_t_7) {
 
           /* "phixlib/parser.pyx":206
@@ -2674,9 +2682,9 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
             __Pyx_GOTREF(__pyx_t_1);
             __pyx_t_16 = __Pyx_PyObject_Append(__pyx_v_group, __pyx_t_1); if (unlikely(__pyx_t_16 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            goto __pyx_L56;
+            goto __pyx_L57;
           }
-          __pyx_L56:;
+          __pyx_L57:;
 
           /* "phixlib/parser.pyx":209
  *                         group.append({})
@@ -2749,7 +2757,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
  * 
  *                 elif stack:
  */
-          goto __pyx_L52_break;
+          goto __pyx_L53_break;
         }
 
         /* "phixlib/parser.pyx":214
@@ -2791,10 +2799,10 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
  * 
  *             # this occurs when we're exiting a nested repeating group
  */
-          goto __pyx_L52_break;
+          goto __pyx_L53_break;
         }
       }
-      __pyx_L52_break:;
+      __pyx_L53_break:;
 
       /* "phixlib/parser.pyx":225
  *             # before the outer group ends.
@@ -2815,9 +2823,9 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
  */
         goto __pyx_L5_continue;
       }
-      goto __pyx_L36;
+      goto __pyx_L37;
     }
-    __pyx_L36:;
+    __pyx_L37:;
 
     /* "phixlib/parser.pyx":229
  * 
@@ -3030,6 +3038,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_35, __pyx_k_35, sizeof(__pyx_k_35), 0, 0, 1, 0},
   {&__pyx_kp_s_8, __pyx_k_8, sizeof(__pyx_k_8), 0, 0, 1, 0},
+  {&__pyx_kp_s_9, __pyx_k_9, sizeof(__pyx_k_9), 0, 0, 1, 0},
   {&__pyx_n_s_BeginString, __pyx_k_BeginString, sizeof(__pyx_k_BeginString), 0, 0, 1, 1},
   {&__pyx_n_s_FIX, __pyx_k_FIX, sizeof(__pyx_k_FIX), 0, 0, 1, 1},
   {&__pyx_n_s_FIXMessage, __pyx_k_FIXMessage, sizeof(__pyx_k_FIXMessage), 0, 0, 1, 1},
