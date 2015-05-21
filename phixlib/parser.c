@@ -1480,7 +1480,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
  * 
  *         try:             # <<<<<<<<<<<<<<
  *             field = fix.Fields[number]
- *             field_length = int(value) if number != '9' and field.type == 'LENGTH' and value.isdigit() else 0
+ *             field_length = int(value) if field.type == 'LENGTH' and number != '9' and value.isdigit() else 0
  */
     {
       __Pyx_ExceptionSave(&__pyx_t_10, &__pyx_t_11, &__pyx_t_12);
@@ -1493,7 +1493,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
  * 
  *         try:
  *             field = fix.Fields[number]             # <<<<<<<<<<<<<<
- *             field_length = int(value) if number != '9' and field.type == 'LENGTH' and value.isdigit() else 0
+ *             field_length = int(value) if field.type == 'LENGTH' and number != '9' and value.isdigit() else 0
  *         except KeyError:
  */
         __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_fix, __pyx_n_s_Fields); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 109; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
@@ -1507,20 +1507,20 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
         /* "phixlib/parser.pyx":110
  *         try:
  *             field = fix.Fields[number]
- *             field_length = int(value) if number != '9' and field.type == 'LENGTH' and value.isdigit() else 0             # <<<<<<<<<<<<<<
+ *             field_length = int(value) if field.type == 'LENGTH' and number != '9' and value.isdigit() else 0             # <<<<<<<<<<<<<<
  *         except KeyError:
  *             # needs testing
  */
-        __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_number, __pyx_kp_s_9, Py_NE)); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_field, __pyx_n_s_type); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_t_3, __pyx_n_s_LENGTH, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         if (__pyx_t_4) {
         } else {
           __pyx_t_7 = __pyx_t_4;
           goto __pyx_L21_bool_binop_done;
         }
-        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_field, __pyx_n_s_type); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
-        __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_t_3, __pyx_n_s_LENGTH, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __pyx_t_4 = (__Pyx_PyString_Equals(__pyx_v_number, __pyx_kp_s_9, Py_NE)); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 110; __pyx_clineno = __LINE__; goto __pyx_L13_error;}
         if (__pyx_t_4) {
         } else {
           __pyx_t_7 = __pyx_t_4;
@@ -1575,7 +1575,7 @@ static PyObject *__pyx_pf_7phixlib_6parser_parse_message(CYTHON_UNUSED PyObject 
 
       /* "phixlib/parser.pyx":111
  *             field = fix.Fields[number]
- *             field_length = int(value) if number != '9' and field.type == 'LENGTH' and value.isdigit() else 0
+ *             field_length = int(value) if field.type == 'LENGTH' and number != '9' and value.isdigit() else 0
  *         except KeyError:             # <<<<<<<<<<<<<<
  *             # needs testing
  *             field = make_field(number)

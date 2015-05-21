@@ -107,7 +107,7 @@ def parse_message(message, cls=None, version='FIX.4.2'):
 
         try:
             field = fix.Fields[number]
-            field_length = int(value) if number != '9' and field.type == 'LENGTH' and value.isdigit() else 0
+            field_length = int(value) if field.type == 'LENGTH' and number != '9' and value.isdigit() else 0
         except KeyError:
             # needs testing
             field = make_field(number)
